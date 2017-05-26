@@ -49,9 +49,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CheckedComboBox.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="FormDatabaseExecuter.cs">
       <SubType>Form</SubType>
     </Compile>
