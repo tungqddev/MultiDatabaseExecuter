@@ -104,25 +104,27 @@ namespace MultiDatabaseExecuter
             }
             MessageBox.Show("Your query've run for all Database that you checked");
         }
-        private string getQueryString()
-        {
-            string executeQuery;
-            OpenFileDialog requestFileDialog = new OpenFileDialog();
-            DialogResult result = requestFileDialog.ShowDialog(); // Show the dialog.
-            executeQuery = requestFileDialog.FileName;
-            return executeQuery;
-        }
 
         private void btnImportQuery_Click(object sender, EventArgs e)
         {
-            try
+            string executeQuery = "";
+
+            OpenFileDialog requestFileDialog = new OpenFileDialog();
+            DialogResult result = requestFileDialog.ShowDialog(); // Show the dialog.
+            if (result == DialogResult.OK) // Test result.
             {
-                rchtxtLogs.Text = File.ReadAllText(getQueryString());
+                try
+                {
+                    executeQuery = requestFileDialog.FileName;
+                    rchtxtLogs.Text = File.ReadAllText(executeQuery);
+                }
+                catch (IOException ex)
+                {
+                    rchtxtLogs.Text = ex.ToString();
+                }
             }
-            catch(IOException ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
+            if (result == DialogResult.Cancel)
+                this.Show();
         }
 
         private void btnExit_Click(object sender, EventArgs e)
